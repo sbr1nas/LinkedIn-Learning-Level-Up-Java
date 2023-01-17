@@ -1,14 +1,24 @@
 package com.linkedin.javacodechallenges;
 
 import java.util.List;
+import java.util.LinkedList;
 import java.util.Map;
+import java.util.stream.*; 
 
 public class App {
     public static List<String> findStudentsWithIncompleteVolunteerEvents(
             List<String> students,
             Map<String, List<String>> attendeesMapping) {
-        // TODO: implement function
-        return List.of();
+                List<String> allVolunteers = new LinkedList<>(); 
+           for(String name: students){
+               long attendedEvents = attendeesMapping.values().stream()
+                                        .filter(volunteer -> volunteer.contains(name))
+                                        .count();
+                if (attendedEvents < 2){
+                        allVolunteers.add(name);
+                }
+           }    
+        return allVolunteers;
     }
 
     public static void main(String[] args) {
