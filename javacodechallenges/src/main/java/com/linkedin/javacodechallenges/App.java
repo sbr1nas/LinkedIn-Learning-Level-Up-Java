@@ -1,7 +1,9 @@
 package com.linkedin.javacodechallenges;
 
+import java.util.Arrays;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.List; 
 
 public class App {
     public static final Map<Character, Integer> letterPoints = Map.ofEntries(Map.entry('A', 1),
@@ -14,7 +16,18 @@ public class App {
             Map.entry('Z', 10));
 
     public static int wordScoreCalculator(String word) {
-        return 0;
+        List<String>letters = Arrays.asList(word.toUpperCase().split(""));
+        System.out.println(letters); 
+        int points = 0; 
+        for(String letter: letters){
+            int sum = letterPoints.keySet().stream()
+                                 .filter(key -> (Character.toString(key)).equals(letter))
+                                 .map(key -> letterPoints.get(key))
+                                 .reduce(0, Integer::sum);
+        points += sum;                         
+                  
+        }
+        return points;
     }
 
     public static void main(String[] args) {
